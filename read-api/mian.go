@@ -7,7 +7,7 @@ import (
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := fmt.Fprint(w, "Hello, World")
+	_, err := fmt.Fprint(w, "read-api")
 	if err != nil {
 		return
 	}
