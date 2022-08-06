@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  db-container:
+    image: mysql:5.7
+    container_name: db-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  web-container:
+    build: ./web
+    container_name: 'web-container'
+    restart: always
+    depends_on:
+      - proxy-container
+    ports:
+      - "3000"
+
+  read-api-container:
+    build: ./read-api
+    container_name: 'read-api-container'
+    restart: always
+    depends_on:
+      - proxy-container
+    ports:
+      - "80"
+
+  write-api-container:
+    build: ./write-api
+    container_name: 'write-api-container'
+    restart: always
+    depends_on:
+      - proxy-container
+    ports:
+      - "80"
+
+  proxy-container:
+    build: ./proxy
+    container_name: 'proxy-container'
+    restart: always
+    ports:
+      - "80:80"
