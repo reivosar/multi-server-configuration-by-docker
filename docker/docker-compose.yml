@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  web-container:
+    image: nginx:latest
+    container_name: 'web-container'
+    volumes:
+      - ./web-container:/usr/share/nginx/html
+    depends_on:
+      - proxy-container
+    ports:
+      - "7000:80"
+
+  read-api-container:
+    build: ./read-api-container
+    container_name: 'read-api-container'
+    depends_on:
+      - proxy-container
+    ports:
+      - "7001:80"
+
+  write-api-container:
+    build: ./write-api-container
+    container_name: 'write-api-container'
+    depends_on:
+      - proxy-container
+    ports:
+      - "7002:80"
+
+  proxy-container:
+    build: ./proxy-container
+    container_name: 'proxy-container'
+    ports:
+      - "80:80"
