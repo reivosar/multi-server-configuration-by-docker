@@ -43,3 +43,4 @@ secrets.yml
 /**/build/
 /**/**/build/
 db/data/*
+write-api/node_modules/*
