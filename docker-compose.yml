@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  db-container:
+    build: ./db
+    container_name: 'db-container'
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./db/.env
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/mysql
+      - ./db/logs:/var/log/mysql
+
   web-container:
     build: ./web
     container_name: 'web-container'
@@ -16,6 +29,7 @@ services:
     restart: always
     depends_on:
       - proxy-container
+      - db-container
     ports:
       - "80"
 
@@ -25,6 +39,7 @@ services:
     restart: always
     depends_on:
       - proxy-container
+      - db-container
     ports:
       - "3000"
 
