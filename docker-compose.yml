@@ -32,6 +32,8 @@ services:
       - db-container
     ports:
       - "80"
+    env_file:
+      - ./db/.env
 
   write-api-container:
     build: ./write-api
@@ -42,6 +44,8 @@ services:
       - db-container
     ports:
       - "3000"
+    env_file:
+      - ./db/.env
 
   proxy-container:
     build: ./proxy

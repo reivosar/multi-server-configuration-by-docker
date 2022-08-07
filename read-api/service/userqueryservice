@@ -1,0 +1,20 @@
+package service
+
+import (
+	"fmt"
+	userdao "read-api/service/userdao"
+	"read-api/model/user"
+	"html/template"
+	"log"
+	"net/http"
+	"strings"
+)
+
+func Index(w http.ResponseWriter, r *http.Request) {
+    users := userDao.selectAll()
+    bytes, err := json.Marshal(users)
+    if err != nil {
+        log.Fatal(err)
+    }
+    w.Write([]byte(string(bytes)))
+}
