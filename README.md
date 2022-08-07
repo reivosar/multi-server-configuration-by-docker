@@ -20,7 +20,7 @@ Dispatch to web-container:3000
 ```
 * http://localhost/read-api
 ```
-Dispatch to read-api-container:3000
+Dispatch to read-api-container:80
 ```
 * http://localhost/write-api
 ```
