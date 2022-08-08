@@ -1,5 +1,0 @@
-type User struct {
-	id    int    `json:"id"`
-	username string `json:"username"`
-	email  string `json:"email"`
-}
