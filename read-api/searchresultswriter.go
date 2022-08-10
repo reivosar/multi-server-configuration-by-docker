@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func writeToResponseWithJsonSearchResults(w http.ResponseWriter, r *http.Request, searchResults any) {
+func writeJsonSearchResults(w http.ResponseWriter, r *http.Request, searchResults any) {
 	bytes, err := json.Marshal(searchResults)
 	if err != nil {
 		log.Fatal(err)

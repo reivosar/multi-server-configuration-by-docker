@@ -7,5 +7,5 @@ import (
 )
 
 func userReadAPIHandler(w http.ResponseWriter, r *http.Request) {
-	writeToResponseWithJsonSearchResults(w, r, getAllUsers())
+	writeJsonSearchResults(w, r, getAllUsers())
 }
